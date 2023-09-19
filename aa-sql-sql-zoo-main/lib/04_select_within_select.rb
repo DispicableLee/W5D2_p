@@ -49,9 +49,13 @@ def richer_than_england
   # Show the countries in Europe with a per capita GDP greater than
   # 'United Kingdom'.
   execute(<<-SQL)
-  SELECT name
+  SELECT name 
   FROM countries
-  WHERE 
+  WHERE (gdp/population) > (
+    SELECT (gdp/population) as per_capita
+    FROM countries
+    WHERE name = 'United Kingdom'
+  ) AND continent = 'Europe'
   SQL
 end
 
@@ -91,13 +95,8 @@ def sparse_continents
   # Hint: Sometimes rewording the problem can help you see the solution.
   execute(<<-SQL)
 
-
-
-  select name, continent, population from countries where continent not in (select continent from countries where population > 25000000)
-
-
-  
-
-  
+  select name, continent, population 
+  from countries 
+  where continent not in (select continent from countries where population > 25000000)
   SQL
 end
