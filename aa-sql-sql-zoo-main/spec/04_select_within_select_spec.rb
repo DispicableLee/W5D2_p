@@ -143,3 +143,4 @@ describe "SELECT within SELECT" do
     end
   end
 end
+

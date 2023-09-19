@@ -47,7 +47,7 @@ def richer_than_england
   execute(<<-SQL)
   SELECT name
   FROM countries
-  WHERE 
+  WHERE GDP > 20
   SQL
 end
 
